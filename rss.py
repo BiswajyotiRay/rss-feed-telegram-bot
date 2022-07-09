@@ -50,10 +50,11 @@ def create_feed_checker(feed_url):
         FEED = feedparser.parse(feed_url)
         entry = FEED.entries[0]
         if entry.id != db.get_link(feed_url).link:
-            message = f"<b>Title:</b> {entry.title}\n"
-            message += f"<b>Size:</b> {humanbytes(entry.size)}\n"
-            message += f"<b>Torrent Link:</b> <code>{entry.link}</code>\n"
-            message += f"<b>Published On:</b> {entry.pubDate}\n"
+      #      message = f"<b>Title:</b> {entry.title}\n"
+       #     message += f"<b>Size:</b> {humanbytes(entry.size)}\n"
+      #      message += f"<b>Torrent Link:</b> <code>{entry.link}</code>\n"
+       #     message += f"<b>Published On:</b> {entry.pubDate}\n"
+             message = f"{entry}"
             try:
                 app.send_message(log_channel, message)
                 db.update_link(feed_url, entry.id)
