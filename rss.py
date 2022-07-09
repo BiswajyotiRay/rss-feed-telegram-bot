@@ -34,13 +34,26 @@ for feed_url in feed_urls:
 
 app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 
+def humanbytes(size):
+    if not size:
+        return ""
+    power = 2 ** 10
+    raised_to_pow = 0
+    dict_power_n = {0: "", 1: "Ki", 2: "Mi", 3: "Gi", 4: "Ti"}
+    while size > power:
+        size /= power
+        raised_to_pow += 1
+    return str(round(size, 2)) + " " + dict_power_n[raised_to_pow] + "B"
 
 def create_feed_checker(feed_url):
     def check_feed():
         FEED = feedparser.parse(feed_url)
         entry = FEED.entries[0]
         if entry.id != db.get_link(feed_url).link:
-            message = f"<b>{entry.title}</b>\n<code>{entry.link}</code>"
+            message = f"<b>Title:</b> {entry.title}\n"
+            message += f"<b>Size:</b> {humanbytes(entry.size)}\n"
+            message += f"<b>Torrent Link:</b> <code>{entry.link}</code>\n"
+            message += f"<b>Published On:</b> {entry.pubDate}\n"
             try:
                 app.send_message(log_channel, message)
                 db.update_link(feed_url, entry.id)
