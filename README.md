@@ -14,7 +14,8 @@ A bot to post messages to Telegram Groups or Channels from rss feed.
 - `DATABASE_URL` - Here is a full [guide](https://github.com/SpEcHiDe/NoPMsBot/wiki/How-to-Install-Database-%3F). For Heroku, just add the `Heroku Postgres` add-on.
 - `INTERVAL` - Checking Interval in seconds. (optional)
 - `MAX_INSTANCES` - Max instances to be used while checking rss feed. (optional)
-
+### Deploying on Heroku
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https://github.com/BiswajyotiRay/rss-feed-telegram-bot/tree/beta)
 ### Deployment
 - Install requirements from [requirements.txt](./requirements.txt)
 ```
