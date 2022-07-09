@@ -54,7 +54,7 @@ def create_feed_checker(feed_url):
        #     message += f"<b>Size:</b> {humanbytes(entry.size)}\n"
       #      message += f"<b>Torrent Link:</b> <code>{entry.link}</code>\n"
        #     message += f"<b>Published On:</b> {entry.pubDate}\n"
-             message = f"{entry}"
+            message = f"{entry}"
             try:
                 app.send_message(log_channel, message)
                 db.update_link(feed_url, entry.id)
