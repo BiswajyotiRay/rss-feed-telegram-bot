@@ -50,7 +50,7 @@ def create_feed_checker(feed_url):
         FEED = feedparser.parse(feed_url)
         entry = FEED.entries[0]
         if entry.id != db.get_link(feed_url).link:
-            if "1337x" in entry.link:
+            if "1337x" in entry.jackettindexer['id']:
                 msg = f"<b>Title:</b> {entry.title}\n\n"
                 msg += f"<b>Size:</b> {humanbytes(entry.size)}"
                 msg += f" | <b>Torrent Site:</b> {entry.jackettindexer['id']}\n\n"
@@ -59,10 +59,15 @@ def create_feed_checker(feed_url):
                 else:
                     msg += f"<b>Torrent Link:</b> <code>{entry.link}</code>\n\n"
                 msg += f"<b>Published On:</b> {entry.published}"
-      #      message = f"<b>Title:</b> {entry.title}\n"
-       #     message += f"<b>Size:</b> {humanbytes(entry.size)}\n"
-      #      message += f"<b>Torrent Link:</b> <code>{entry.link}</code>\n"
-       #     message += f"<b>Published On:</b> {entry.pubDate}\n"
+            elif "eztv" in entry.jackettindexer['id']:
+                msg = f"<b>Title:</b> {entry.title}\n\n"
+                msg += f"<b>Size:</b> {humanbytes(entry.size)}"
+                msg += f" | <b>Torrent Site:</b> {entry.jackettindexer['id']}\n\n"
+                if entry.link.startswith("magnet"):
+                   msg += f"<b>Magnet Link:</b> <code>{entry.link}</code>\n\n"
+                else:
+                    msg += f"<b>Torrent Link:</b> <code>{entry.link}</code>\n\n"
+                msg += f"<b>Published On:</b> {entry.published}"
             else:
                 msg = f"{entry}"
             try:
