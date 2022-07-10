@@ -52,8 +52,12 @@ def create_feed_checker(feed_url):
         if entry.id != db.get_link(feed_url).link:
             if "1337x" in entry.link:
                 msg = f"<b>Title:</b> {entry.title}\n\n"
-                msg += f"<b>Size:</b> {humanbytes(entry.size)} | <b>Torrent Site:</b> {entry.jackettindexer['id']}\n\n"
-                msg += f"<b>Torrent Link:</b> <code>{entry.link}</code>\n\n"
+                msg += f"<b>Size:</b> {humanbytes(entry.size)}"
+                msg += f" | <b>Torrent Site:</b> {entry.jackettindexer['id']}\n\n"
+                if entry.link.startswith("magnet"):
+                   msg += f"<b>Magnet Link:</b> <code>{entry.link}</code>\n\n"
+                else:
+                    msg += f"<b>Torrent Link:</b> <code>{entry.link}</code>\n\n"
                 msg += f"<b>Published On:</b> {entry.published}"
       #      message = f"<b>Title:</b> {entry.title}\n"
        #     message += f"<b>Size:</b> {humanbytes(entry.size)}\n"
