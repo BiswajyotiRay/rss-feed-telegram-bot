@@ -53,7 +53,7 @@ def create_feed_checker(feed_url):
             if "1337x" in entry.jackettindexer['id']:
                 msg = f"<b>Title:</b> {entry.title}\n\n"
                 size = entry.size
-                msg += f"<b>Size:</b> {humanbytes(size)}"
+                msg += f"<b>Size:</b> {humanbytes(int(size))}"
                 msg += f" | <b>Torrent Site:</b> {entry.jackettindexer['id']}\n\n"
                 if entry.link.startswith("magnet"):
                    msg += f"<b>Magnet Link:</b> <code>{entry.link}</code>\n\n"
@@ -63,7 +63,7 @@ def create_feed_checker(feed_url):
             elif "eztv" in entry.jackettindexer['id']:
                 msg = f"<b>Title:</b> {entry.title}\n\n"
                 size = entry.size
-                msg += f"<b>Size:</b> {humanbytes(size)}"
+                msg += f"<b>Size:</b> {humanbytes(int(size))}"
                 msg += f" | <b>Torrent Site:</b> {entry.jackettindexer['id']}\n\n"
                 if entry.link.startswith("magnet"):
                    msg += f"<b>Magnet Link:</b> <code>{entry.link}</code>\n\n"
