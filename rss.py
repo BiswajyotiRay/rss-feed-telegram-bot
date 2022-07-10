@@ -34,7 +34,7 @@ for feed_url in feed_urls:
 
 app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 
-def humanbytes(size):
+def humanbytes(size: int):
     if not size:
         return ""
     power = 2 ** 10
@@ -52,7 +52,7 @@ def create_feed_checker(feed_url):
         if entry.id != db.get_link(feed_url).link:
             if "1337x" in entry.link:
                 msg = f"<b>Title:</b> {entry.title}\n\n"
-                msg += f"<b>Size:</b> {entry.size} | <b>Torrent Site:</b> {entry.jackettindexer}\n\n"
+                msg += f"<b>Size:</b> {humanbytes(entry.size)} | <b>Torrent Site:</b> {entry.jackettindexer['id']}\n\n"
                 msg += f"<b>Torrent Link:</b> <code>{entry.link}</code>\n\n"
                 msg += f"<b>Published On:</b> {entry.published}"
       #      message = f"<b>Title:</b> {entry.title}\n"
