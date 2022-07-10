@@ -34,7 +34,7 @@ for feed_url in feed_urls:
 
 app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 
-def humanbytes(size: int):
+def humanbytes(size):
     if not size:
         return ""
     power = 2 ** 10
@@ -52,7 +52,8 @@ def create_feed_checker(feed_url):
         if entry.id != db.get_link(feed_url).link:
             if "1337x" in entry.jackettindexer['id']:
                 msg = f"<b>Title:</b> {entry.title}\n\n"
-                msg += f"<b>Size:</b> {humanbytes(entry.size)}"
+                size = entry.size
+                msg += f"<b>Size:</b> {humanbytes(size)}"
                 msg += f" | <b>Torrent Site:</b> {entry.jackettindexer['id']}\n\n"
                 if entry.link.startswith("magnet"):
                    msg += f"<b>Magnet Link:</b> <code>{entry.link}</code>\n\n"
@@ -61,7 +62,8 @@ def create_feed_checker(feed_url):
                 msg += f"<b>Published On:</b> {entry.published}"
             elif "eztv" in entry.jackettindexer['id']:
                 msg = f"<b>Title:</b> {entry.title}\n\n"
-                msg += f"<b>Size:</b> {humanbytes(entry.size)}"
+                size = entry.size
+                msg += f"<b>Size:</b> {humanbytes(size)}"
                 msg += f" | <b>Torrent Site:</b> {entry.jackettindexer['id']}\n\n"
                 if entry.link.startswith("magnet"):
                    msg += f"<b>Magnet Link:</b> <code>{entry.link}</code>\n\n"
