@@ -52,26 +52,84 @@ def create_feed_checker(feed_url):
         if entry.id != db.get_link(feed_url).link:
             if "1337x" in entry.jackettindexer['id']:
                 msg = f"<b>Title:</b> {entry.title}\n\n"
-                size = entry.size
-                msg += f"<b>Size:</b> {humanbytes(int(size))}"
-                msg += f" | <b>Torrent Site:</b> {entry.jackettindexer['id']}\n\n"
+                msg += f"<b>Size:</b> {humanbytes(int(entry.size))}"
+                msg += f" | <b>Torrent Site:</b> 1337x\n\n"
                 if entry.link.startswith("magnet"):
                    msg += f"<b>Magnet Link:</b> <code>{entry.link}</code>\n\n"
                 else:
-                    msg += f"<b>Torrent Link:</b> <code>{entry.link}</code>\n\n"
+                    msg += f"<b>Direct Link:</b> <code>{entry.link}</code>\n\n"
                 msg += f"<b>Published On:</b> {entry.published}"
             elif "eztv" in entry.jackettindexer['id']:
                 msg = f"<b>Title:</b> {entry.title}\n\n"
-                size = entry.size
-                msg += f"<b>Size:</b> {humanbytes(int(size))}"
-                msg += f" | <b>Torrent Site:</b> {entry.jackettindexer['id']}\n\n"
+                msg += f"<b>Size:</b> {humanbytes(int(entry.size))}"
+                msg += f" | <b>Torrent Site:</b> EZTV\n\n"
                 if entry.link.startswith("magnet"):
                    msg += f"<b>Magnet Link:</b> <code>{entry.link}</code>\n\n"
                 else:
-                    msg += f"<b>Torrent Link:</b> <code>{entry.link}</code>\n\n"
+                    msg += f"<b>Direct Link:</b> <code>{entry.link}</code>\n\n"
+                msg += f"<b>Published On:</b> {entry.published}"
+            elif "animetosho" in entry.jackettindexer['id']:
+                msg = f"<b>Title:</b> {entry.title}\n\n"
+                msg += f"<b>Size:</b> {humanbytes(int(entry.size))}"
+                msg += f" | <b>Torrent Site:</b> Anime Tosho\n\n"
+                if entry.files:
+                   msg += f"<b>Files:</b> {entry.files}\n\n"
+                if entry.link.startswith("magnet"):
+                   msg += f"<b>Magnet Link:</b> <code>{entry.link}</code>\n\n"
+                else:
+                    msg += f"<b>Direct Link:</b> <code>{entry.link}</code>\n\n"
+                msg += f"<b>Published On:</b> {entry.published}"
+            elif "yts" in entry.jackettindexer['id']:
+                msg = f"<b>Title:</b> {entry.title}\n\n"
+                msg += f"<b>Size:</b> {humanbytes(int(entry.size))}"
+                msg += f" | <b>Torrent Site:</b> YTS\n\n"
+                if entry.link.startswith("magnet"):
+                   msg += f"<b>Magnet Link:</b> <code>{entry.link}</code>\n\n"
+                else:
+                    msg += f"<b>Direct Link:</b> <code>{entry.link}</code>\n\n"
+                msg += f"<b>Published On:</b> {entry.published}"
+            elif "torrentdownloads" in entry.jackettindexer['id']:
+                msg = f"<b>Title:</b> {entry.title}\n\n"
+                msg += f"<b>Size:</b> {humanbytes(int(entry.size))}"
+                msg += f" | <b>Torrent Site:</b> Torrent Downloads\n\n"
+                if entry.link.startswith("magnet"):
+                   msg += f"<b>Magnet Link:</b> <code>{entry.link}</code>\n\n"
+                else:
+                    msg += f"<b>Direct Link:</b> <code>{entry.link}</code>\n\n"
+                msg += f"<b>Published On:</b> {entry.published}"
+            elif "torrentgalaxy" in entry.jackettindexer['id']:
+                msg = f"<b>Title:</b> {entry.title}\n\n"
+                msg += f"<b>Size:</b> {humanbytes(int(entry.size))}"
+                msg += f" | <b>Torrent Site:</b> TorrentGalaxy\n\n"
+                if entry.link.startswith("magnet"):
+                   msg += f"<b>Magnet Link:</b> <code>{entry.link}</code>\n\n"
+                else:
+                    msg += f"<b>Direct Link:</b> <code>{entry.link}</code>\n\n"
+                msg += f"<b>Published On:</b> {entry.published}"
+            elif "rarbg" in entry.jackettindexer['id']:
+                msg = f"<b>Title:</b> {entry.title}\n\n"
+                msg += f"<b>Size:</b> {humanbytes(int(entry.size))}"
+                msg += f" | <b>Torrent Site:</b> RARBG\n\n"
+                if entry.link.startswith("magnet"):
+                   msg += f"<b>Magnet Link:</b> <code>{entry.link}</code>\n\n"
+                else:
+                    msg += f"<b>Direct Link:</b> <code>{entry.link}</code>\n\n"
+                msg += f"<b>Published On:</b> {entry.published}"
+            elif "nyaasi" in entry.jackettindexer['id']:
+                msg = f"<b>Title:</b> {entry.title}\n\n"
+                msg += f"<b>Size:</b> {humanbytes(int(entry.size))}"
+                msg += f" | <b>Torrent Site:</b> Nyaa.si\n\n"
+                if entry.link.startswith("magnet"):
+                   msg += f"<b>Magnet Link:</b> <code>{entry.link}</code>\n\n"
+                else:
+                    msg += f"<b>Direct Link:</b> <code>{entry.link}</code>\n\n"
                 msg += f"<b>Published On:</b> {entry.published}"
             else:
-                msg = f"{entry}"
+                msg = f"<b>Title:</b> {entry.title}\n\n"
+                msg += f"<b>Size:</b> {humanbytes(int(entry.size))}"
+                msg += f" | <b>Torrent Site:</b> {entry.jackettindexer['id']}\n\n"
+                msg += f"<b>Link:</b> <code>{entry.link}</code>\n\n"
+                msg += f"<b>Published On:</b> {entry.published}"
             try:
                 app.send_message(log_channel, msg)
                 db.update_link(feed_url, entry.id)
