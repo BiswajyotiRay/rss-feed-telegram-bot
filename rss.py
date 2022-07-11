@@ -124,6 +124,15 @@ def create_feed_checker(feed_url):
                 else:
                     msg += f"<b>Direct Link:</b> <code>{entry.link}</code>\n\n"
                 msg += f"<b>Published On:</b> {entry.published}"
+            elif "animeclipse" in entry.jackettindexer['id']:
+                msg = f"<b>Title:</b> {entry.title}\n\n"
+                msg += f"<b>Size:</b> {humanbytes(int(entry.size))}"
+                msg += f" | <b>Torrent Site:</b> AnimeClipse\n\n"
+                if entry.link.startswith("magnet"):
+                   msg += f"<b>Magnet Link:</b> <code>{entry.link}</code>\n\n"
+                else:
+                    msg += f"<b>Direct Link:</b> <code>{entry.link}</code>\n\n"
+                msg += f"<b>Published On:</b> {entry.published}"
             else:
                 msg = f"<b>Title:</b> {entry.title}\n\n"
                 msg += f"<b>Size:</b> {humanbytes(int(entry.size))}"
